@@ -12,23 +12,24 @@
       <tr class="row">
         <th class="col-sm-1"></th>
         <th class="col-sm-2">Name</th>
-        <th class="col-sm-9">Value</th>
+        <th class="col-sm-8">Value</th>
+        <th class="col-sm-1">
+          <button type="button" class="btn btn-sm btn-success float-right" (click)="addProduct(product)">
+            <span><i class="fa fa-plus"></i> Add</span>
+          </button>
+        </th>
       </tr>
     </thead>
     <tbody class="thead-light">
-    <tr class="row" *ngFor="let product of products" (click)="selectProduct(product)">
+    <tr class="row" *ngFor="let product of products; let i = index" (click)="selectProduct(product)">
       <td class="col-sm-1">
         <img width="25"
              src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg==">
       </td>
       <td class="col-sm-2">{{product.name}}</td>
-      <td class="col-sm-9">{{product.value}}</td>
+      <td class="col-sm-8">{{product.value}}</td>
+      <td class="col-sm-1"><button class="btn btn-sm btn-danger float-right" (click)="removeProduct(i)"><i class="fa fa-times"></i></button></td>
     </tr>
     </tbody>
-    <tfoot>
-    <button type="button" class="btn btn-sm btn-primary float-right" (click)="addProduct(product)">
-      <span><i class="fa fa-plus"></i> Add</span>
-    </button>
-    </tfoot>
   </table>
 </div>

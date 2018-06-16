@@ -1,11 +1,12 @@
-import {Component, NgModule, OnInit} from '@angular/core';
+import {Component, NgModule, OnInit, TemplateRef} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {Router} from '@angular/router';
 import {DataService} from '../data.service';
-import { ButtonsModule } from 'ngx-bootstrap';
+import {ButtonsModule, ModalModule, BsModalService, BsModalRef} from 'ngx-bootstrap';
 
 @NgModule({
-  imports: [ButtonsModule.forRoot()]
+  imports: [ButtonsModule.forRoot(), ModalModule.forRoot()],
+  declarations: []
 })
 
 @Component({
@@ -17,12 +18,16 @@ export class ProductsComponent implements OnInit {
 
   products: any;
   selectedProduct: any;
+  newProduct: any;
+  modalRef: BsModalRef;
 
   constructor(
     private route: ActivatedRoute,
-    private router: Router, private _data: DataService) {
-    this.route.params.subscribe(res => console.log(res));
-  }
+    private router: Router,
+    private modalService: BsModalService,
+    private _data: DataService) {
+      this.route.params.subscribe(res => console.log(res));
+    }
 
   ngOnInit() {
     this._data.product.subscribe(res => this.products = res);
@@ -36,4 +41,17 @@ export class ProductsComponent implements OnInit {
     this.selectedProduct = product;
     console.log('Selected: ', this.selectedProduct);
   }
+
+  addProduct() {
+    this.products.push(this.newProduct);
+    this.newProduct = {};
+    this._data.updateProduct(this.products);
+  }
+
+  removeProduct(i) {
+    this.products.splice(i, 1);
+    this._data.updateProduct(this.products);
+  }
+
+
 }
