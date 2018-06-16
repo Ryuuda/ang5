@@ -1,7 +1,12 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, NgModule, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {Router} from '@angular/router';
 import {DataService} from '../data.service';
+import { ButtonsModule } from 'ngx-bootstrap';
+
+@NgModule({
+  imports: [ButtonsModule.forRoot()]
+})
 
 @Component({
   selector: 'app-products',
